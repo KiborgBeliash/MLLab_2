@@ -1,0 +1,27 @@
+plt.figure(figsize=(6,4))
+df["Survived"].hist(bins=[-0.5, 0.5, 1.5], edgecolor="black", rwidth=0.6)
+plt.title("Распределение Survived"); plt.xlabel("Survived"); plt.ylabel("Count")
+plt.xticks([0,1]); plt.show()
+
+fig, axes = plt.subplots(1, 3, figsize=(18,5))
+df.groupby(["Sex","Survived"]).size().unstack().plot(kind="bar", stacked=True, color=["red","green"], ax=axes[0])
+axes[0].set_title("Выживание по полу")
+axes[0].set_xlabel("Пол"); axes[0].set_ylabel("Количество пассажиров")
+axes[0].legend(["Погиб (0)","Выжил (1)"])
+axes[0].tick_params(axis="x", rotation=0)
+
+df.groupby(["Pclass","Survived"]).size().unstack().plot(kind="bar", stacked=True, color=["red","green"], ax=axes[1])
+axes[1].set_title("Выживание по классу каюты")
+axes[1].set_xlabel("Класс"); axes[1].set_ylabel("Количество пассажиров")
+axes[1].legend(["Погиб (0)","Выжил (1)"])
+axes[1].tick_params(axis="x", rotation=0)
+
+bins = np.arange(0, 90, 5)
+axes[2].hist(df[df["Survived"]==1]["Age"].dropna(), bins=bins, alpha=0.6, color="green", label="Выжили (1)")
+axes[2].hist(df[df["Survived"]==0]["Age"].dropna(), bins=bins, alpha=0.6, color="red", label="Погибли (0)")
+axes[2].set_title("Распределение возраста по статусу выживания")
+axes[2].set_xlabel("Возраст"); axes[2].set_ylabel("Количество пассажиров")
+axes[2].legend()
+axes[2].grid(axis="y", alpha=0.3)
+
+plt.tight_layout(); plt.show()

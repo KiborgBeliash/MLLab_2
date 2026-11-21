@@ -1,0 +1,13 @@
+df = pd.read_csv(path + "/Titanic-Dataset.csv")
+print("Shape:", df.shape)
+print("\nHead:\n", df.head())
+print("\nInfo:")
+df.info()
+print("\nПропуски:\n", df.isna().sum())
+print("\nДубликаты строк:", df.duplicated().sum())
+print("\nSurvived штуки:\n", df["Survived"].value_counts().sort_index())
+print("\nSurvived доли:\n", df["Survived"].value_counts(normalize=True).sort_index())
+print("\nОписание числовых признаков:\n", df.describe().T)
+print("\nУникальные значения категориальных:")
+for col in ["Sex", "Embarked", "Pclass"]:
+    print(f"  {col}: {df[col].unique()}")

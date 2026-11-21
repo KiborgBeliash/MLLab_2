@@ -1,0 +1,5 @@
+fig, ax = plt.subplots(1, 3, figsize=(18,5))
+dt_imp.head(10)[::-1].plot(kind="barh", ax=ax[0]); ax[0].set_title("Top DT importance")
+rf_imp.head(10)[::-1].plot(kind="barh", ax=ax[1]); ax[1].set_title("Top RF importance")
+gb_imp.head(10)[::-1].plot(kind="barh", ax=ax[2]); ax[2].set_title("Top GB importance")
+plt.tight_layout(); plt.show()
